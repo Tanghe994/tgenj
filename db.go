@@ -95,6 +95,7 @@ func (db *DB) Exec(q string, args ...interface{}) error {
 /* Query the database and return the result.*/
 /*TODO*/
 func (db *DB) Query(q string, args ...interface{}) (*query.Result,error) {
+	/*这里对语句进行解析*/
 	pd,err := parser.ParseQuery(q)
 	if err != nil {
 		return nil, err

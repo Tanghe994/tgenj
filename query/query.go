@@ -4,6 +4,7 @@ import (
 	"context"
 	"tgenj/database"
 	"tgenj/document"
+	"tgenj/expr"
 )
 
 /**
@@ -36,4 +37,10 @@ func (r *Result) Iterate(fn func(d document.Document) error) error {
 		return nil
 	}
 	return r.Iterator.Iterate(fn)
+}
+
+/* A Statement represents a unique action that can be executed against the database*/
+type Statement interface {
+	Run(*database.Transaction, []expr.Param) (Result, error)
+	IsReadOnly() bool
 }
