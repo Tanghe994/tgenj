@@ -14,7 +14,7 @@ import (
  */
 /*TODO*/
 type Query struct {
-	//Statements []Statement
+	Statements []Statement
 	tx         *database.Transaction
 	autoCommit bool
 }
@@ -39,6 +39,10 @@ func (r *Result) Iterate(fn func(d document.Document) error) error {
 	return r.Iterator.Iterate(fn)
 }
 
+/*New create a new query with given statements*/
+func New(statements ...Statement) Query {
+	return Query{Statements : statements}
+}
 /* A Statement represents a unique action that can be executed against the database*/
 type Statement interface {
 	Run(*database.Transaction, []expr.Param) (Result, error)

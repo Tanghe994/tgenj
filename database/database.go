@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"sync"
+	"tgenj/document/encoding"
 	"tgenj/engine"
 	"tgenj/options"
 )
@@ -17,6 +18,11 @@ type Database struct {
 	attachedTxMu        sync.Mutex
 	/*This controls concurrency on read-only and read/write transactions*/
 	txmu 				sync.RWMutex
+
+	/*用于对文档的编码解码器*/
+	Codec encoding.Codec
+	/*table and index catalog*/
+	catalog *Catalog
 
 }
 

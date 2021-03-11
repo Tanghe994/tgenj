@@ -1,6 +1,9 @@
 package database
 
-import "tgenj/transaction"
+import (
+	"tgenj/engine"
+	"tgenj/transaction"
+)
 
 /*Transaction represents a database transaction*/
 type Transaction struct {
@@ -106,8 +109,8 @@ func (tx *Transaction) AddFieldConstraint()  {
 
 }
 
-func (tx *Transaction) RenameTable()  {
-
+func (tx *Transaction) RenameTable(oldName ,newName string) error  {
+	return tx.db.catalog.R
 }
 
 func (tx *Transaction) DropTable()  {
@@ -140,7 +143,7 @@ func (tx *Transaction) ReIndexAll()  {
 }
 
 /*关于存储功能的实现 TODO*/
-func (tx *Transaction) getTableStore()  {
+func (tx *Transaction) getTableStore()  *tableStore{
 
 }
 func (tx *Transaction) getIndexStore()  {

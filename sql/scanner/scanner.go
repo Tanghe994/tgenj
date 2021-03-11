@@ -158,6 +158,14 @@ func (s *BufScanner) scanFunc(scan func() TokenInfo) TokenInfo {
 
 }
 
+// Unscan pushes the previously token back onto the buffer.
+func (s *BufScanner) Unscan() { s.n++ }
+
+// Curr returns the last read token.
+func (s *BufScanner) Curr() TokenInfo {
+	return s.buf[(s.i-s.n+len(s.buf))%len(s.buf)]
+}
+
 /*reader represents a buffered rune reader used by the scanner*/
 /*It provides a fixed-length circular buffer that can be unread*/
 type reader struct {
